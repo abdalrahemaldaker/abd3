@@ -26,3 +26,19 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 
 
 
+Route::group(['prefix' => LaravelLocalization::setLocale()], function()
+{
+	Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Auth::routes();
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+
+	Route::get('test',function(){
+		return View::make('test');
+	});
+});
