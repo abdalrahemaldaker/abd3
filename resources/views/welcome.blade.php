@@ -4,7 +4,8 @@
 
 @section('content')
 
-@include('sections.facilities')
+    @include('partials.header')
+    @include('sections.facilities')
     @include('sections.about')
     @include('sections.class')
     @include('sections.registration')

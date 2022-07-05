@@ -58,9 +58,6 @@
 
 
 
-    <!-- Header Start -->
-    @include('partials.header')
-    <!-- Header End -->
 
 
 

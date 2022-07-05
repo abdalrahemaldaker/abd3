@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\YearController as AdminYearController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +23,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/admin', [AdminController::class, 'dashboard']);
+// Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 
 
 
@@ -35,10 +38,19 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
     Auth::routes();
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/admin', [AdminController::class, 'dashboard']);
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+    Route::resource('admin/users',UserController::class);
 
-	Route::get('test',function(){
-		return View::make('test');
-	});
-});
+
+    Route::group(['as' => 'admin.' , 'prefix' => 'admin' , 'middleware' => 'auth'] ,function(){
+
+        Route::get('/', [AdminController::class, 'dashboard']);
+        Route::get('/dashboard', [AdminController::class, 'dashboard']);
+        Route::resource('users',UserController::class)->except('show');
+        Route::resource('years',AdminYearController::class)->except('show');
+
+    });
+
+    });
+
