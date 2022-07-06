@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\YearController as AdminYearController;
-use App\Http\Controllers\StageController;
+use App\Http\Controllers\admin\StageController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +49,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 
         Route::get('/', [AdminController::class, 'dashboard']);
         Route::get('/dashboard', [AdminController::class, 'dashboard']);
-        Route::resource('users',UserController::class)->except('show');
+        Route::resource('users',UserController::class);
+        // ->except('show')
         Route::resource('years',AdminYearController::class)->except('show');
         Route::resource('stages', StageController::class);
 

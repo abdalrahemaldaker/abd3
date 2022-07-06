@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
+/**
+ * Class UserController
+ * @package App\Http\Controllers
+ */
 class UserController extends Controller
 {
     /**
@@ -18,24 +18,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function __construct()
+    public function index()
     {
-        //Gate::authorize('access-users');
-    }
+        $users = User::paginate();
 
-
-     public function index()
-    {
-        //Two ways to authorize
-        /*if (! Gate::allows('access-users')) {
-            return redirect()->back()->with(['message'=>'Unauthorized action','message-color'=>'danger']);}*/
-
-            //Gate::authorize('access-users');
-
-        $users=User::paginate(3);
-        $users->withquerystring();
-       return view('admin.users.index',compact('users'));
+        return view('admin.user.index', compact('users'))
+            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
     }
 
     /**
@@ -45,78 +33,79 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $user = new User();
+        return view('admin.user.create', compact('user'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request)
+    public function store(Request $request)
     {
-        $user=User::create($request->validated());
+        request()->validate(User::$rules);
 
+        $user = User::create($request->all());
 
-
-        session()->flash('message' , 'User added');
-        session()->flash('message-color' , 'success');
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        return view('admin.users.show', compact('user'));
+        $user = User::find($id);
+
+        return view('admin.user.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        return view('admin.users.edit',compact('user' ));
+        $user = User::find($id);
+
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \Illuminate\Http\Request $request
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        if($request->validated('email')==$user->email){
-            $user->update($request->validated());
-            session()->flash('message' , 'updated succesfuly');
-             session()->flash('message-color' , 'success');
-             return redirect()->route('admin.users.index');
-        }
-        else return redirect()->back();
 
+
+        $user->update($request->validated());
+
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User updated successfully');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user->delete();
-        session()->flash('message' , 'Deleted succesfuly');
-        session()->flash('message-color' , 'warning');
-        return redirect()->route('admin.users.index');
+        $user = User::find($id)->delete();
+
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User deleted successfully');
     }
 }
