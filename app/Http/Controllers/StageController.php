@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Stage;
 use Illuminate\Http\Request;
 
+/**
+ * Class StageController
+ * @package App\Http\Controllers
+ */
 class StageController extends Controller
 {
     /**
@@ -14,7 +18,10 @@ class StageController extends Controller
      */
     public function index()
     {
-        //
+        $stages = Stage::paginate();
+
+        return view('admin.stage.index', compact('stages'))
+            ->with('i', (request()->input('page', 1) - 1) * $stages->perPage());
     }
 
     /**
@@ -24,62 +31,79 @@ class StageController extends Controller
      */
     public function create()
     {
-        //
+        $stage = new Stage();
+        return view('admin.stage.create', compact('stage'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        request()->validate(Stage::$rules);
+
+        $stage = Stage::create($request->all());
+
+        return redirect()->route('admin.stages.index')
+            ->with('success', 'Stage created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Stage  $stage
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Stage $stage)
+    public function show($id)
     {
-        //
+        $stage = Stage::find($id);
+
+        return view('admin.stage.show', compact('stage'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Stage  $stage
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Stage $stage)
+    public function edit($id)
     {
-        //
+        $stage = Stage::find($id);
+
+        return view('admin.stage.edit', compact('stage'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Stage  $stage
+     * @param  \Illuminate\Http\Request $request
+     * @param  Stage $stage
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Stage $stage)
     {
-        //
+        request()->validate(Stage::$rules);
+
+        $stage->update($request->all());
+
+        return redirect()->route('admin.stages.index')
+            ->with('success', 'Stage updated successfully');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Stage  $stage
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy(Stage $stage)
+    public function destroy($id)
     {
-        //
+        $stage = Stage::find($id)->delete();
+
+        return redirect()->route('admin.stages.index')
+            ->with('success', 'Stage deleted successfully');
     }
 }
