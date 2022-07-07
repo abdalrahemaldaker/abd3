@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ $stage->name ?? 'Show Stage' }}
+    {{ $subject->name ?? 'Show Subject' }}
 @endsection
 
 @section('content')
@@ -11,10 +11,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Show Stage</span>
+                            <span class="card-title">Show Subject</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('admin.stages.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('admin.subjects.index') }}"> Back</a>
                         </div>
                     </div>
 
@@ -22,7 +22,11 @@
 
                         <div class="form-group">
                             <strong>Name:</strong>
-                            {{ $stage->name }}
+                            {{ $subject->name }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Stage Id:</strong>
+                            {{ $subject->stage_id }}
                         </div>
 
                     </div>

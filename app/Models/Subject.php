@@ -5,28 +5,29 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Stage
+ * Class Subject
  *
  * @property $id
  * @property $name
+ * @property $stage_id
  * @property $created_at
  * @property $updated_at
  *
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Stage extends Model
+class Subject extends Model
 {
 
-    public function subjects()
+
+    public function stage()
     {
-        return $this->hasMany(subjects::class);
+        return $this->belongsTo(stage::class);
     }
 
-
     static $rules = [
-		'name'      => 'required',
-
+		'name' => 'required',
+		'stage_id'  => 'required|exists:stages,id'
     ];
 
     protected $perPage = 20;
@@ -36,11 +37,10 @@ class Stage extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'subject_id'
-    ];
+    protected $fillable = ['name','stage_id'];
 
 
 
 }
+
+

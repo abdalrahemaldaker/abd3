@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Create Stage
+    Create Subject
 @endsection
 
 @section('content')
@@ -9,17 +9,17 @@
         <div class="row">
             <div class="col-md-12">
 
-                @includeif('partials.errors')
+                @includeif('/partials.errors')
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Create Stage</span>
+                        <span class="card-title">Create Subject</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.stages.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.subjects.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('admin.stage.form')
+                            @include('admin.subject.form')
 
                         </form>
                     </div>

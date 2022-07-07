@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\YearController as AdminYearController;
 use App\Http\Controllers\admin\StageController;
+use App\Http\Controllers\admin\SubjectController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -53,6 +54,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         // ->except('show')
         Route::resource('years',AdminYearController::class)->except('show');
         Route::resource('stages', StageController::class);
+        Route::resource('subjects', SubjectController::class);
 
     });
     // Route::resource('stages', StageController::class);
