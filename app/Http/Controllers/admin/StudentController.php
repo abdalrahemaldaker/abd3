@@ -46,7 +46,9 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $validated=request()->validate(Student::$rules);
+        request()->validate(Student::$rules);
+        // dd($request->all());
+        // $student = Student::create($request->all());
 
         $student= new Student();
         $student->fname=$request->fname;
@@ -57,7 +59,6 @@ class StudentController extends Controller
         $student->birthdate=$request->birthdate;
         $student->note=$request->note;
         $student->save();
-
 
         $user= new User();
         $user->name=$request->fname.' '.$request->lname;
@@ -125,7 +126,12 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        $student = Student::find($id)->delete();
+        // $student = Student::find($id)->delete();
+        $student = Student::find($id);
+        $student->user->delete();
+
+        $student->delete();
+
 
         return redirect()->route('admin.students.index')
             ->with('success', 'Student deleted successfully');

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ $student->name ?? 'Show Student' }}
+    {{ $teacher->name ?? 'Show Teacher' }}
 @endsection
 
 @section('content')
@@ -11,10 +11,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Show Student</span>
+                            <span class="card-title">Show Teacher</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('admin.students.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('admin.teachers.index') }}"> Back</a>
                         </div>
                     </div>
 
@@ -22,35 +22,35 @@
 
                         <div class="form-group">
                             <strong>Fname:</strong>
-                            {{ $student->fname }}
+                            {{ $teacher->fname }}
                         </div>
                         <div class="form-group">
                             <strong>Lname:</strong>
-                            {{ $student->lname }}
+                            {{ $teacher->lname }}
                         </div>
                         <div class="form-group">
                             <strong>Father:</strong>
-                            {{ $student->father }}
+                            {{ $teacher->father }}
                         </div>
                         <div class="form-group">
                             <strong>Email:</strong>
-                            {{ $student->user->email ?? '' }}
+                            {{ $teacher->user->email ?? ''}}
+                        </div>
+                        <div class="form-group">
+                            <strong>Address:</strong>
+                            {{ $teacher->address }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Note:</strong>
+                            {{ $teacher->note }}
                         </div>
                         <div class="form-group">
                             <strong>Phone:</strong>
-                            {{ $student->phone }}
+                            {{ $teacher->phone }}
                         </div>
                         <div class="form-group">
                             <strong>Mobile:</strong>
-                            {{ $student->mobile }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Birthdate:</strong>
-                            {{ $student->birthdate }}
-                        </div>
-                        <div class="form-group">
-                            <strong>note:</strong>
-                            {{ $student->note }}
+                            {{ $teacher->mobile }}
                         </div>
 
                     </div>

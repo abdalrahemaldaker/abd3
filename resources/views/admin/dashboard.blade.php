@@ -2,9 +2,11 @@
 @section('title','Layout')
 @section('content')
 <a href="{{ route('admin.users.index') }}">Users</a>
-<a href="{{ route('admin.years.index') }}">years</a>
-<a href="{{ route('admin.stages.index') }}">stages</a>
-<a href="{{ route('admin.subjects.index') }}">subjects</a>
+<a href="{{ route('admin.years.index') }}">Years</a>
+<a href="{{ route('admin.stages.index') }}">Stages</a>
+<a href="{{ route('admin.subjects.index') }}">Subjects</a>
+<a href="{{ route('admin.students.index') }}">Students</a>
+<a href="{{ route('admin.teachers.index') }}">Teacher</a>
 
 
 

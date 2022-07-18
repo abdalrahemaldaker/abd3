@@ -22,7 +22,7 @@
                     {{ Form::label('cpassword') }}
                     {{ Form::password('password_confirmation', ['class' => 'form-control' . ($errors->has('cpassword') ? ' is-invalid' : '')
                     , 'placeholder' => 'cPassword']) }}
-                    {!! $errors->first('pas sword', '<div class="invalid-feedback">:message</div>') !!}
+                    {!! $errors->first('password', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                   {{-- <div class="form-group">
                 <label for="cpassword">Confirm password</label>
