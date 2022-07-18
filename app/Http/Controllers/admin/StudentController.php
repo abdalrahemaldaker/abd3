@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Update_Student_Request;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -46,7 +47,6 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $validated=request()->validate(Student::$rules);
-        // dd ($validated);
 
         $student= new Student();
         $student->fname=$request->fname;
@@ -56,7 +56,6 @@ class StudentController extends Controller
         $student->mobile=$request->mobile;
         $student->birthdate=$request->birthdate;
         $student->note=$request->note;
-        // dd($request);
         $student->save();
 
 
@@ -64,16 +63,10 @@ class StudentController extends Controller
         $user->name=$request->fname.' '.$request->lname;
         $user->email=$request->email;
         $user->password=$request->password;
-        // $user->userable_type='Student';
-        // $user->userable_id=$student->id;
+
         $user->save();
         $student->user()->save($user);
-        // $terminador = ProveedorTerminacion::create (Input::all());
 
-        // $proveedor = new Proveedor;
-        // $proveedor->fill (Input::all());
-
-        // $terminador->proveedor()->save($proveedor);
 
 
         return redirect()->route('admin.students.index')
@@ -113,12 +106,14 @@ class StudentController extends Controller
      * @param  Student $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Update_Student_Request $request, Student $student)
     {
-        request()->validate(Student::$rules);
 
-        $student->update($request->all());
 
+        $student->update($request->validated());
+
+        array_merge($request->validated(),array('name' => $request->validated('fname').' '.$request->validated('lname')  ?? false ));
+        $student->user->update($request->validated());
         return redirect()->route('admin.students.index')
             ->with('success', 'Student updated successfully');
     }

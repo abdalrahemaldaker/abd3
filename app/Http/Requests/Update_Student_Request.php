@@ -32,7 +32,7 @@ class Update_Student_Request extends FormRequest
             'birthdate' => 'required',
             'note' => 'required',
             'email'     => 'required|email',
-            'password'  => 'string',
+            'password'  => 'string|nullable|confirmed',
         ];
     }
 }
