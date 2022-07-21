@@ -54,6 +54,7 @@
                                                 <form action="{{ route('admin.sclasses.destroy',$sclass->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('admin.sclasses.show',$sclass->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('admin.sclasses.edit',$sclass->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.sclasses.manage',$sclass->id) }}"><i class="fa fa-fw fa-edit"></i> manage</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
