@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -23,13 +24,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Student extends Model
 {
-
+    use HasFactory;
     public function user()
     {
         return $this->morphOne(User::class, 'userable');
     }
 
-
+    public function teachers(){
+        return $this->belongsToMany(Teacher::class);
+    }
 
 
     static $rules = [
@@ -52,7 +55,6 @@ class Student extends Model
      * @var array
      */
     protected $fillable = ['fname','lname','father','phone','mobile','birthdate','Note'];
-
 
 
 }

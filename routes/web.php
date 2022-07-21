@@ -62,8 +62,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         Route::resource('students', StudentController::class);
         Route::resource('teachers', TeacherController::class);
         Route::resource('sclasses', SclassController::class);
+        Route::get('sclasses/manage/{Sclass}', [SclassController::class , 'manage'])->name('sclasses.manage');
+
+        // Route::get('/home', [TypeaheadController::class, 'index']);
 
     });
+
+    Route::get('sclasses/autocomplete-search', [SclassController::class, 'autocompleteSearch'])->name('sclasses.autocomplete-search');
     // Route::resource('stages', StageController::class);
     });
 
