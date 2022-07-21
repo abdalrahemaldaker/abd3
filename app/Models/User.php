@@ -71,12 +71,12 @@ class User extends Authenticatable
         'userable_type'     =>  '',
         'userable_id'       =>  '0'
     ];
-    protected function password(): Attribute
-    {
-        return Attribute::make(
-             set: fn ($value) => Hash::make($value)
-        );
-    }
+    // protected function password(): Attribute
+    // {
+    //     return Attribute::make(
+    //          set: fn ($value) => Hash::make($value)
+    //     );
+    // }
 
     public function userable()
     {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class UserController
@@ -46,7 +47,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         request()->validate(User::$rules);
-
+        $request['password']=Hash::make($request['password']);
         $user = User::create($request->all());
 
         return redirect()->route('admin.users.index')
