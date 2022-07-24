@@ -30,7 +30,7 @@ class Student extends Model
         return $this->morphOne(User::class, 'userable');
     }
 
-    public function teachers(){
+    public function sclasses(){
         return $this->belongsToMany(Teacher::class);
     }
 
