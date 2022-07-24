@@ -19,10 +19,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Sclass extends Model
 {
-    
+
     static $rules = [
 		'year_id' => 'required',
-		'stage_id' => 'required',
+        'stage_id' => 'required',
+        'name' => 'required|string',
     ];
 
     protected $perPage = 20;
@@ -32,7 +33,7 @@ class Sclass extends Model
      *
      * @var array
      */
-    protected $fillable = ['year_id','stage_id'];
+    protected $fillable = ['year_id','stage_id','name'];
 
 
     /**
@@ -42,7 +43,7 @@ class Sclass extends Model
     {
         return $this->hasOne('App\Models\Stage', 'id', 'stage_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -50,6 +51,8 @@ class Sclass extends Model
     {
         return $this->hasOne('App\Models\Year', 'id', 'year_id');
     }
-    
 
+    public function students(){
+        return $this->belongsToMany(Student::class);
+    }
 }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\SclassController;
+use App\Http\Controllers\admin\SclassmanageController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\YearController as AdminYearController;
 use App\Http\Controllers\admin\StageController;
@@ -62,13 +63,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         Route::resource('students', StudentController::class);
         Route::resource('teachers', TeacherController::class);
         Route::resource('sclasses', SclassController::class);
-        Route::get('sclasses/manage/{Sclass}', [SclassController::class , 'manage'])->name('sclasses.manage');
+        Route::get('sclasses/manage/{Sclass}', [SclassmanageController::class , 'manage'])->name('sclasses.manage');
+        Route::post('sclasses/{Sclass}/fill', [SclassmanageController::class,'fill'])->name('sclasses.fill');
+        Route::delete('sclasses/manage/{sclass}', [SclassmanageController::class ,'destroy'] )->name('student.detach');
 
         // Route::get('/home', [TypeaheadController::class, 'index']);
 
     });
 
-    Route::get('sclasses/autocomplete-search', [SclassController::class, 'autocompleteSearch'])->name('sclasses.autocomplete-search');
+    Route::get('sclasses/autocomplete-search', [SclassmanageController::class, 'autocompleteSearch'])->name('sclasses.autocomplete-search');
     // Route::resource('stages', StageController::class);
     });
 

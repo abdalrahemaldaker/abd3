@@ -121,34 +121,9 @@ class SclassController extends Controller
             ->with('success', 'Sclass deleted successfully');
     }
 
-    public function manage($id)
-    {
-        $sclass = Sclass::find($id);
-
-        return view('admin.sclass.manage', compact('sclass'));
-    }
-
-    public function autocompleteSearch(Request $request)
-    {
-        // $users = DB::table('users')
-        //      ->select(DB::raw('count(*) as user_count, status'))
-        //      ->where('status', '<>', 1)
-        //      ->groupBy('status')
-        //      ->get();
 
 
 
-                $query = $request->get('query');
 
-
-                $data = DB::table("students")
-                ->select(DB::raw('CONCAT (fname ," ",lname) as name , id'))
-                ->where("fname","LIKE","%{$query}%")
-                ->orWhere("lname","LIKE","%{$query}%")
-                ->get();
-
-        return response()->json($data);
-
-    }
 
 }
