@@ -6,7 +6,8 @@
 <a href="{{ route('admin.stages.index') }}">Stages</a>
 <a href="{{ route('admin.subjects.index') }}">Subjects</a>
 <a href="{{ route('admin.students.index') }}">Students</a>
-<a href="{{ route('admin.teachers.index') }}">Teacher</a>
+<a href="{{ route('admin.teachers.index') }}">Teachers</a>
+<a href="{{ route('admin.sclasses.index') }}">Classes</a>
 
 
 
