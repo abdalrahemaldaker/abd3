@@ -69,8 +69,8 @@
 
 
                                 <td>
-                                    <form action="{{ route('admin.sclasses.manage',$sclass ,$student->id) }}" method="POST">
-
+                                    <form action="{{ route('admin.sclasses.manage',$sclass) }}" method="POST">
+                                        <input type="hidden" name="student" value={{ $student->id }}>
 
                                         @csrf
                                         @method('DELETE')

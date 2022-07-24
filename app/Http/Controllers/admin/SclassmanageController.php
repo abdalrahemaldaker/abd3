@@ -63,9 +63,10 @@ class SclassmanageController extends Controller
         return redirect()->route('admin.sclasses.manage',$sclass)
         ->with('warning', 'the student already inside the class');
     }
-    public function destroy($sclass ,$student)
+    public function destroy($sclass ,Request $request)
     {
-
+        $student=$request->student;
+        $sclass=Sclass::find($sclass);
         $sclass->students()->detach($student);
         return redirect()->route('admin.sclasses.manage',$sclass)
         ->with('warning', 'the student already inside the class');
