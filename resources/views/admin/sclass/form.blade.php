@@ -6,6 +6,11 @@
     @endphp
 
         <div class="form-group">
+            {{ Form::label('name') }}
+            {{ Form::text('name', $sclass->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
+            {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
             {{ Form::label('year') }}
             {{ Form::select('year_id', $yoptions,$sclass->year_id ,['class' => 'form-control' . ($errors->has('year_id') ? ' is-invalid' : '')]); }}
             {!! $errors->first('year_id', '<div class="invalid-feedback">:message</div>') !!}

@@ -35,6 +35,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
+										<th>name</th>
 
 										<th>Year</th>
 										<th>Stage</th>
@@ -46,6 +47,7 @@
                                     @foreach ($sclasses as $sclass)
                                         <tr>
                                             <td>{{ ++$i }}</td>
+                                            <td>{{ $sclass->name}}</td>
 
 											<td>{{ $sclass->year->name }}</td>
 											<td>{{ $sclass->stage->name }}</td>
@@ -54,7 +56,7 @@
                                                 <form action="{{ route('admin.sclasses.destroy',$sclass->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('admin.sclasses.show',$sclass->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('admin.sclasses.edit',$sclass->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.sclasses.manage',$sclass->id) }}"><i class="fa fa-fw fa-edit"></i> manage</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.sclasses.manage',$sclass) }}"><i class="fa fa-fw fa-edit"></i> manage</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
