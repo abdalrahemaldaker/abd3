@@ -50,6 +50,10 @@ class Teacher extends Model
         return $this->morphOne(User::class, 'userable');
     }
 
+    public function courses()
+    {
+        return $this->hasMany(courses::class);
+    }
 
 
 }

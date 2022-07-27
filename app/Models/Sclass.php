@@ -55,4 +55,9 @@ class Sclass extends Model
     public function students(){
         return $this->belongsToMany(Student::class);
     }
+
+    public function courses()
+    {
+        return $this->hasMany(courses::class);
+    }
 }

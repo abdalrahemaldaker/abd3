@@ -23,6 +23,11 @@ class Stage extends Model
         return $this->hasMany(subjects::class);
     }
 
+    public function sclasses()
+    {
+        return $this->hasMany(sclasses::class);
+    }
+
 
     static $rules = [
 		'name'      => 'required',

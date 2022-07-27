@@ -25,6 +25,11 @@ class Subject extends Model
         return $this->belongsTo(stage::class);
     }
 
+    public function courses()
+    {
+        return $this->hasMany(courses::class);
+    }
+
     static $rules = [
 		'name' => 'required',
 		'stage_id'  => 'required|exists:stages,id'

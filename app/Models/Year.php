@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Year extends Model
 {
-    
+
     static $rules = [
 		'name' => 'required',
     ];
@@ -31,6 +31,11 @@ class Year extends Model
      */
     protected $fillable = ['name'];
 
+
+    public function years()
+    {
+        return $this->hasMany(years::class);
+    }
 
 
 }
