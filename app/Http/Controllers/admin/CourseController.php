@@ -80,7 +80,7 @@ class CourseController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id ,$sclass)
+    public function edit($sclass,$id)
     {
         $teachers=DB::table('teachers')->select(DB::raw('id,CONCAT(fname ," ",lname) as name'))->get();
         $subjects=Subject::all();
