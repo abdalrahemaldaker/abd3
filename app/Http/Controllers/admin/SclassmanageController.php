@@ -28,11 +28,11 @@ class SclassmanageController extends Controller
 
 
 
-                $query = $request->get('query');
+                $query = $request->get('term');
 
 
                 $data = DB::table("students")
-                ->select(DB::raw('CONCAT (fname ," ",lname,":",id) as name'))
+                ->select(DB::raw('CONCAT (fname ," ",lname,":",id) as value'))
                 ->where("fname","LIKE","%{$query}%")
                 ->orWhere("lname","LIKE","%{$query}%")
                 ->get();
@@ -43,25 +43,42 @@ class SclassmanageController extends Controller
 
     public function fill(Request $request ,$sclass)
     {
-        //  dd($sclass);
-        $student=explode(':',$request->student);
-        $student=$student[1];
-        $q=DB::table('sclass_student')
-        ->where('student_id','=',$student)
-        ->where('sclass_id','=',$sclass)->get();
-        // echo $q->tosql();
-         //dd($q);
-        if($q->isEmpty())
-        {
-            $sclass=Sclass::find($sclass);
+        $students=explode(',',$request->students);
 
-            echo 'hello';
-             $sclass->students()->attach($student);
-             return redirect()->route('admin.sclasses.manage',$sclass)
-            ->with('success', 'student added successfully.');
+        // $student=explode(':',$students[0]);
+        // dd($sclass);
+        $sclass=Sclass::find($sclass);
+        if($sclass->isEmpty)
+        {return redirect()->back()->with('warning', 'sclass is invalid');}
+        $added=0;
+        $failed=0;
+
+        foreach($students as $student)
+        {
+        $student=explode(':',$student);
+        if(count($student)>1){
+            $student=$student[1];
+            $q=DB::table('sclass_student')
+            ->where('student_id','=',$student)
+            ->where('sclass_id','=',$sclass->id)->get();
+            // echo $q->tosql();
+            // dd($q);
+            if($q->isEmpty())
+            {
+
+
+                // dd($student);
+                 $sclass->students()->attach($student);
+                 $added++;
+                }else
+                $failed++;}
+
         }
-        return redirect()->route('admin.sclasses.manage',$sclass)
-        ->with('warning', 'the student already inside the class');
+            if ($added>0)
+             return redirect()->route('admin.sclasses.manage',$sclass)
+            ->with('success', "$added students added successfully, $failed students not added");
+             return redirect()->route('admin.sclasses.manage',$sclass)
+            ->with('warning', "already in class.");
     }
     public function destroy($sclass ,Request $request)
     {
@@ -69,6 +86,6 @@ class SclassmanageController extends Controller
         $sclass=Sclass::find($sclass);
         $sclass->students()->detach($student);
         return redirect()->route('admin.sclasses.manage',$sclass)
-        ->with('warning', 'the student already inside the class');
+        ->with('warning', 'student removed successfuly from class');
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('template_title')
     Manage classes
@@ -7,7 +7,6 @@
 
 
 @section('content')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
 
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
@@ -21,15 +20,21 @@
 @endif
 <form method="POST" action="{{ route('admin.sclasses.fill' , $sclass) }}"  role="form" enctype="multipart/form-data">
     @csrf
-    <div classs="form-group">
+    {{-- <div classs="form-group">
         <input class="typeahead form-control" name="student"  aria-autocomplete="list" type="text">
         <div class="form-group">
 
             {{-- {{ Form::label('name') }} --}}
             {{-- {{ Form::text('name', $subject->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
-            {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!} --}}
+            {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+    </div> --}}
+    <div class="ui-widget">
+        <label for="birds">Add students </label>
+        <input id="birds" class="" size="50" name="students">
+
     </div>
+
     <button type="submit" class="btn btn-primary" autocomplete="off">Submit</button>
 </form>
 
@@ -83,6 +88,11 @@
                 </table>
             </div>
         </div>
+
+
+
+
+
     </div>
     {{-- {!! $students->links() !!} --}}
 </div>
@@ -90,16 +100,5 @@
 
 
 
-<script src="/js/ajaxlibsjquery1.9.1jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
-<script type="text/javascript">
-    var path = "{{ route('sclasses.autocomplete-search') }}";
-    $('input.typeahead').typeahead({
-        source:  function (query, process) {
-        return $.get(path, { query: query }, function (data) {
-                return process(data);
-            });
-        }
-    });
-</script>
+
 @endsection
