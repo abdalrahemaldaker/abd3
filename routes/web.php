@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\AttendanceController;
 use App\Http\Controllers\admin\CourseController;
+use App\Http\Controllers\admin\ExamTypeController;
 use App\Http\Controllers\admin\SclassController;
 use App\Http\Controllers\admin\SclassmanageController;
 use App\Http\Controllers\admin\UserController;
@@ -66,6 +67,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         Route::resource('students', StudentController::class);
         Route::resource('teachers', TeacherController::class);
         Route::resource('sclasses', SclassController::class);
+        Route::resource('exam-types', ExamTypeController::class);
         Route::get('sclasses/manage/{sclass}', [SclassmanageController::class , 'manage'])->name('sclasses.manage');
         Route::post('sclasses/{Sclass}/fill', [SclassmanageController::class,'fill'])->name('sclasses.fill');
         Route::delete('sclasses/manage/{sclass}', [SclassmanageController::class ,'destroy'] )->name('student.detach');
