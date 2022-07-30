@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\AttendanceController;
 use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\admin\SclassController;
 use App\Http\Controllers\admin\SclassmanageController;
@@ -12,7 +13,8 @@ use App\Http\Controllers\admin\StageController;
 use App\Http\Controllers\admin\StudentController;
 use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\TeacherController;
-
+use App\Models\Attendance;
+use App\Models\Sclass;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -68,7 +70,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         Route::post('sclasses/{Sclass}/fill', [SclassmanageController::class,'fill'])->name('sclasses.fill');
         Route::delete('sclasses/manage/{sclass}', [SclassmanageController::class ,'destroy'] )->name('student.detach');
         Route::resource('/sclasses/{sclass}/courses', CourseController::class);
+        Route::get('/attendances', [AttendanceController::class , 'index'])->name('attendances.index');
+        Route::get('/attendances/{sclass}/edit', [AttendanceController::class , 'edit'])->name('attendances.edit');
+        // Route::resource('{sclass}/attendances', AttendanceController::class)->except('index');
 
+        // Route::get('/attendances/{sclass}/edit',[AttendanceController::class , 'fill'])->name('attendances.fill');
+        // Route::POST('/attendances',[AttendanceController::class , 'save'])->name('attendances.save');
 
     });
 

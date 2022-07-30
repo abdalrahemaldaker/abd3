@@ -20,6 +20,13 @@ use Illuminate\Database\Eloquent\Model;
 class Sclass extends Model
 {
 
+//     public function getRouteKeyName()
+// {
+//     return 'name';
+// }
+
+
+
     static $rules = [
 		'year_id' => 'required',
         'stage_id' => 'required',
@@ -59,5 +66,9 @@ class Sclass extends Model
     public function courses()
     {
         return $this->hasMany(courses::class);
+    }
+    public function attendances()
+    {
+        return $this->hasManyThrough(Attendance::class,Student::class);
     }
 }

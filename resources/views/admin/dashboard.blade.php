@@ -8,6 +8,7 @@
 <a href="{{ route('admin.students.index') }}">Students</a>
 <a href="{{ route('admin.teachers.index') }}">Teachers</a>
 <a href="{{ route('admin.sclasses.index') }}">Classes</a>
+<a href="{{ route('admin.attendances.index') }}">Attendance</a>
 
 
 

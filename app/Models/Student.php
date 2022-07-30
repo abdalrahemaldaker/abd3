@@ -34,6 +34,11 @@ class Student extends Model
         return $this->belongsToMany(Teacher::class);
     }
 
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
 
     static $rules = [
 		'fname' => 'required',
