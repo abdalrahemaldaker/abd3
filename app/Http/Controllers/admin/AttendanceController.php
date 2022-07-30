@@ -75,13 +75,22 @@ class AttendanceController extends Controller
      */
     public function edit(Request $request, Sclass $sclass)
     {
-        // dd($sclass);
+
         $validated= $request->validate([
             'date'      =>  'required|date'
         ]);
-        // $attendances = $sclass->attendances()->where('date',$validated['date']);
         $date=$validated['date'];
-        // dd($attendances);
+
+        // foreach ($sclass->students as $student)
+        // {
+        //     if($student->attendances()->wherehas()) dd($student);
+        //     $attendance=$student->attendances()->where('date',$date)->get();
+        //     if(!$attendance->first)
+        //     dd($attendance);
+        //     dd($student);
+
+        // }
+
         return view('admin.attendance.edit', compact('sclass','date'));
     }
 
@@ -92,11 +101,22 @@ class AttendanceController extends Controller
      * @param  Attendance $attendance
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Attendance $attendance)
+    public function update(Request $request, Sclass $sclass, $date)
     {
-        request()->validate(Attendance::$rules);
 
-        $attendance->update($request->all());
+
+        foreach($sclass->students as $student)
+        {
+            // $student->attendances()->where('date',$date)->delete();
+            // $attendance= new Attendance(['date'         =>  $date ,
+            //                              'student_id'   =>  $student->id ,
+            //                              'status'       =>  $request[$student->id]]);
+            // $attendance->save
+            $student->attendances()->create([   'date'         =>  $date ,
+                                                'status'       =>  $request[$student->id]]);
+        }
+
+        // $attendance->update($request->all());
 
         return redirect()->route('admin.attendances.index')
             ->with('success', 'Attendance updated successfully');

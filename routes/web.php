@@ -72,6 +72,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         Route::resource('/sclasses/{sclass}/courses', CourseController::class);
         Route::get('/attendances', [AttendanceController::class , 'index'])->name('attendances.index');
         Route::get('/attendances/{sclass}/edit', [AttendanceController::class , 'edit'])->name('attendances.edit');
+        Route::post('/attendances/{sclass}/{date}', [AttendanceController::class , 'update'])->name('attendances.update');
         // Route::resource('{sclass}/attendances', AttendanceController::class)->except('index');
 
         // Route::get('/attendances/{sclass}/edit',[AttendanceController::class , 'fill'])->name('attendances.fill');
