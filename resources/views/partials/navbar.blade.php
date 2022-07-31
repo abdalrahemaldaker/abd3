@@ -79,7 +79,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav font-weight-bold mx-auto py-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
                 <a href="about.html" class="nav-item nav-link">About</a>
                 <a href="class.html" class="nav-item nav-link">Classes</a>
                 <a href="team.html" class="nav-item nav-link">Teachers</a>
