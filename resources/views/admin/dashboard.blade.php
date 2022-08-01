@@ -10,6 +10,7 @@
 <a href="{{ route('admin.sclasses.index') }}">Classes</a>
 <a href="{{ route('admin.attendances.index') }}">Attendance</a>
 <a href="{{ route('admin.exam-types.index') }}">Exam Types</a>
+<a href="{{ route('admin.exams.index') }}">Exams</a>
 
 
 

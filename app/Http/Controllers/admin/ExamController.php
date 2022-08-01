@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Exam;
+use App\Models\ExamType;
+use App\Models\Year;
 use Illuminate\Http\Request;
 
 /**
@@ -20,7 +23,7 @@ class ExamController extends Controller
     {
         $exams = Exam::paginate();
 
-        return view('exam.index', compact('exams'))
+        return view('admin.exam.index', compact('exams'))
             ->with('i', (request()->input('page', 1) - 1) * $exams->perPage());
     }
 
@@ -31,8 +34,10 @@ class ExamController extends Controller
      */
     public function create()
     {
+        $years=Year::all();
+        $examtypes=ExamType::all();
         $exam = new Exam();
-        return view('exam.create', compact('exam'));
+        return view('admin.exam.create', compact('exam','years','examtypes'));
     }
 
     /**
@@ -47,7 +52,7 @@ class ExamController extends Controller
 
         $exam = Exam::create($request->all());
 
-        return redirect()->route('exams.index')
+        return redirect()->route('admin.exams.index')
             ->with('success', 'Exam created successfully.');
     }
 
@@ -61,7 +66,7 @@ class ExamController extends Controller
     {
         $exam = Exam::find($id);
 
-        return view('exam.show', compact('exam'));
+        return view('admin.exam.show', compact('exam'));
     }
 
     /**
@@ -72,9 +77,11 @@ class ExamController extends Controller
      */
     public function edit($id)
     {
+        $years=Year::all();
+        $examtypes=ExamType::all();
         $exam = Exam::find($id);
 
-        return view('exam.edit', compact('exam'));
+        return view('admin.exam.edit', compact('exam','years','examtypes'));
     }
 
     /**
@@ -90,7 +97,7 @@ class ExamController extends Controller
 
         $exam->update($request->all());
 
-        return redirect()->route('exams.index')
+        return redirect()->route('admin.exams.index')
             ->with('success', 'Exam updated successfully');
     }
 
@@ -103,7 +110,7 @@ class ExamController extends Controller
     {
         $exam = Exam::find($id)->delete();
 
-        return redirect()->route('exams.index')
+        return redirect()->route('admin.exams.index')
             ->with('success', 'Exam deleted successfully');
     }
 }

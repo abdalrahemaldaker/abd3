@@ -1,25 +1,26 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Create Exam
+    Update Exam
 @endsection
 
 @section('content')
     <section class="content container-fluid">
-        <div class="row">
+        <div class="">
             <div class="col-md-12">
 
                 @includeif('partials.errors')
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Create Exam</span>
+                        <span class="card-title">Update Exam</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('exams.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.exams.update', $exam->id) }}"  role="form" enctype="multipart/form-data">
+                            {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('exam.form')
+                            @include('admin.exam.form')
 
                         </form>
                     </div>

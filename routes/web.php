@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\AttendanceController;
 use App\Http\Controllers\admin\CourseController;
+use App\Http\Controllers\admin\ExamController;
 use App\Http\Controllers\admin\ExamTypeController;
 use App\Http\Controllers\admin\SclassController;
 use App\Http\Controllers\admin\SclassmanageController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\admin\StudentController;
 use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\TeacherController;
 use App\Models\Attendance;
+use App\Models\Exam;
 use App\Models\Sclass;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -75,6 +77,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         Route::get('/attendances', [AttendanceController::class , 'index'])->name('attendances.index');
         Route::get('/attendances/{sclass}/edit', [AttendanceController::class , 'edit'])->name('attendances.edit');
         Route::post('/attendances/{sclass}/{date}', [AttendanceController::class , 'update'])->name('attendances.update');
+        Route::resource('exams', ExamController::class);
         // Route::resource('{sclass}/attendances', AttendanceController::class)->except('index');
 
         // Route::get('/attendances/{sclass}/edit',[AttendanceController::class , 'fill'])->name('attendances.fill');
@@ -90,4 +93,5 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
     Route::get('/sclasses/autocomplete-search', [SclassmanageController::class, 'autocompleteSearch'])->name('/sclasses.autocomplete-search');
     // Route::resource('stages', StageController::class);
 });
+
 
