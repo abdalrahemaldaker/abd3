@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use App\Models\ExamType;
+use App\Models\Stage;
 use App\Models\Year;
 use Illuminate\Http\Request;
 
@@ -36,8 +37,9 @@ class ExamController extends Controller
     {
         $years=Year::all();
         $examtypes=ExamType::all();
+        $stages=Stage::all();
         $exam = new Exam();
-        return view('admin.exam.create', compact('exam','years','examtypes'));
+        return view('admin.exam.create', compact('exam','years','examtypes','stages'));
     }
 
     /**
@@ -79,9 +81,9 @@ class ExamController extends Controller
     {
         $years=Year::all();
         $examtypes=ExamType::all();
+        $stages=Stage::all();
         $exam = Exam::find($id);
-
-        return view('admin.exam.edit', compact('exam','years','examtypes'));
+        return view('admin.exam.edit', compact('exam','years','examtypes','stages'));
     }
 
     /**

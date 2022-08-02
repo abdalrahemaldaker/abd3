@@ -33,5 +33,9 @@ class ExamType extends Model
     protected $fillable = ['name','desc'];
 
 
+    public function exams(){
+
+        return $this->hasMany(Exam::class);
+    }
 
 }

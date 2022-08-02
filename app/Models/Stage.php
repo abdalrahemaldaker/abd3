@@ -28,6 +28,10 @@ class Stage extends Model
         return $this->hasMany(sclasses::class);
     }
 
+    public function exams(){
+
+        return $this->hasMany(Exam::class);
+    }
 
     static $rules = [
 		'name'      => 'required',

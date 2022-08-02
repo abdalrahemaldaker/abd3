@@ -32,9 +32,14 @@ class Year extends Model
     protected $fillable = ['name'];
 
 
-    public function years()
+    public function sclasses()
     {
-        return $this->hasMany(years::class);
+        return $this->hasMany(Sclass::class);
+    }
+
+    public function exams(){
+
+        return $this->hasMany(Exam::class);
     }
 
 
