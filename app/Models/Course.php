@@ -29,6 +29,7 @@ class Course extends Model
 
 		'teacher_id' => 'required',
 		'subject_id' => 'required',
+        'max'        => 'required|numeric'
     ];
 
     protected $perPage = 20;
@@ -38,7 +39,7 @@ class Course extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','sclass_id','teacher_id','subject_id'];
+    protected $fillable = ['name','sclass_id','teacher_id','subject_id','max'];
 
 
     /**

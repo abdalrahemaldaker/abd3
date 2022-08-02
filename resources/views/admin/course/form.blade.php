@@ -24,6 +24,11 @@
             {!! $errors->first('subject_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
+        <div class="form-group">
+            {{ Form::label('max') }}
+            {{ Form::number('max', $course->max, ['class' => 'form-control' . ($errors->has('max') ? ' is-invalid' : ''), 'placeholder' => 'max']) }}
+            {!! $errors->first('max', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
 
         <div class="form-group">
 

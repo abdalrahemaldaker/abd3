@@ -54,7 +54,7 @@ class CourseController extends Controller
         $validated=request()->validate(Course::$rules);
         $validated['sclass_id']=$sclass->id;
         // array_push($validated,'sclass_id' => $sclass->id );
-        dd($validated);
+        // dd($validated);
         $course = Course::create($validated);
 
         return redirect()->route('admin.courses.index',$sclass)
