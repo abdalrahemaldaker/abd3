@@ -52,7 +52,10 @@ class ExamController extends Controller
     {
         request()->validate(Exam::$rules);
 
-        $exam = Exam::create($request->all());
+        if($exam = Exam::create($request->all()));
+        {
+            
+        }
 
         return redirect()->route('admin.exams.index')
             ->with('success', 'Exam created successfully.');

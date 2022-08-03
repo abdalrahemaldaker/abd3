@@ -40,6 +40,12 @@ class Student extends Model
     }
 
 
+    public function examResults(){
+
+        return $this->hasMany(ExamResult::class);
+    }
+
+
     static $rules = [
 		'fname' => 'required',
 		'lname' => 'required',

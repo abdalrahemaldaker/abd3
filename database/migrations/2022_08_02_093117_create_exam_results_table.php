@@ -16,8 +16,11 @@ return new class extends Migration
         Schema::create('exam_results', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('exam_id');
+            $table->foreign('exam_id')->references('id')->on('exams');
             $table->unsignedBigInteger('student_id');
+            $table->foreign('student_id')->references('id')->on('students');
             $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses');
             $table->string('mark');
             $table->timestamps();
         });

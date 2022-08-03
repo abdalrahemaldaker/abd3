@@ -67,4 +67,11 @@ class Course extends Model
     }
 
 
+    public function examResults(){
+
+        return $this->hasMany(ExamResult::class);
+    }
+
+
+
 }

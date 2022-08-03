@@ -25,10 +25,10 @@ class Exam extends Model
 
     static $rules = [
 		'name' => 'required',
-		'year_id' => 'required',
-		'exam_type_id' => 'required',
+		'year_id' => 'required|exists:years,id',
+		'exam_type_id' => 'required|exists:exam_types,id',
 		'date' => 'required',
-        'stage_id' => 'required'
+        'stage_id' => 'required|exists:stages,id'
     ];
 
     protected $perPage = 20;
@@ -63,6 +63,11 @@ class Exam extends Model
     {
         // return $this->hasOne('App\Models\Year', 'id', 'year_id');
         return $this->belongsTo(Stage::class);
+    }
+
+    public function examResults(){
+
+        return $this->hasMany(ExamResult::class);
     }
 
 }
