@@ -5,8 +5,11 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use App\Models\ExamType;
+use App\Models\Sclass;
 use App\Models\Stage;
+use App\Models\Student;
 use App\Models\Year;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 /**
@@ -52,10 +55,13 @@ class ExamController extends Controller
     {
         request()->validate(Exam::$rules);
 
-        if($exam = Exam::create($request->all()));
-        {
-            
-        }
+        // if($exam = Exam::create($request->all()));
+        // {
+        //     // dd($request->year_id) ;
+
+        //     $sclasses=Sclass::where('year_id',$request->year_id)->where('stage_id',$request->stage_id)->get();
+        //     dd($sclasses);
+        // }
 
         return redirect()->route('admin.exams.index')
             ->with('success', 'Exam created successfully.');
