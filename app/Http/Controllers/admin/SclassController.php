@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
 use App\Models\Sclass;
 use App\Models\Stage;
 use App\Models\Student;
@@ -56,7 +57,17 @@ class SclassController extends Controller
         request()->validate(Sclass::$rules);
 
         $sclass = Sclass::create($request->all());
+        $stage=Stage::find($sclass->stage_id);
+        foreach($stage->subjects as $subject)
+        {
+            $course= new Course();
+            $course->name=$subject->name;
+            $course->subject_id=$subject->id;
+            $course->teacher_id=100000;
+            $course->sclass_id=$sclass->id;
+            $course->save();
 
+        }
         return redirect()->route('admin.sclasses.index')
             ->with('success', 'Sclass created successfully.');
     }
