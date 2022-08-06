@@ -44,7 +44,9 @@ class Subject extends Model
      */
     protected $fillable = ['name','stage_id'];
 
-
+    protected $attributes= [
+        'max'    => 0,
+    ];
 
 }
 
