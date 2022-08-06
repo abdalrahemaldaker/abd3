@@ -55,13 +55,14 @@ class ExamController extends Controller
     {
         request()->validate(Exam::$rules);
 
-        // if($exam = Exam::create($request->all()));
+        // if($exam = Exam::create($request->all()))
         // {
         //     // dd($request->year_id) ;
 
         //     $sclasses=Sclass::where('year_id',$request->year_id)->where('stage_id',$request->stage_id)->get();
         //     dd($sclasses);
         // }
+        $exam = Exam::create($request->all());
 
         return redirect()->route('admin.exams.index')
             ->with('success', 'Exam created successfully.');
