@@ -34,6 +34,15 @@ class ExamResultController extends Controller
         return view('admin.exam-result.exam', compact('exam','sclasses'))
             ->with('i', (request()->input('page', 1) - 1) * $sclasses->perPage());
     }
+
+
+    public function results(Exam $exam , Sclass $sclass)
+    {
+        $students= $sclass->students();
+        return view('admin.exam-result.results', compact('exam','sclass','students'));
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
