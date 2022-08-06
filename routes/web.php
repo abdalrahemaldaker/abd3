@@ -82,8 +82,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         Route::resource('exams', ExamController::class);
         // Route::resource('exam-results', ExamResultController::class);
         Route::get('/exam-results', [ExamResultController::class , 'index'])->name('exam-results.index');
-        Route::get('/exam-results/{sclass}/edit', [ExamResultController::class , 'edit'])->name('exam-results.edit');
-        Route::post('/exam-results/{sclass}/{date}', [ExamResultController::class , 'update'])->name('exam-results.update');
+        Route::get('/exam-results/{exam}/exam', [ExamResultController::class , 'exam'])->name('exam-results.exam');
+        Route::post('/exam-results/{exam}/{date}', [ExamResultController::class , 'update'])->name('exam-results.update');
         // Route::resource('{sclass}/attendances', AttendanceController::class)->except('index');
 
         // Route::get('/attendances/{sclass}/edit',[AttendanceController::class , 'fill'])->name('attendances.fill');

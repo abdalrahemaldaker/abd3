@@ -38,6 +38,7 @@
 
 										<th>Name</th>
 										<th>Year</th>
+										<th>ٍStage</th>
 										<th>Exam Type</th>
 										<th>Date</th>
 
@@ -51,6 +52,7 @@
 
 											<td>{{ $exam->name }}</td>
 											<td>{{ $exam->year->name }}</td>
+											<td>{{ $exam->stage->name }}</td>
 											<td>{{ $exam->examtype->name }}</td>
 											<td>{{ $exam->date }}</td>
 

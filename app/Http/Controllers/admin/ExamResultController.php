@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Exam;
 use App\Models\ExamResult;
+use App\Models\Sclass;
 use Illuminate\Http\Request;
 
 /**
@@ -19,12 +21,19 @@ class ExamResultController extends Controller
      */
     public function index()
     {
-        $examResults = ExamResult::paginate();
+        $exams = Exam::latest()->paginate();
 
-        return view('admin.exam-result.index', compact('examResults'))
-            ->with('i', (request()->input('page', 1) - 1) * $examResults->perPage());
+        return view('admin.exam-result.index', compact('exams'))
+            ->with('i', (request()->input('page', 1) - 1) * $exams->perPage());
     }
 
+    public function exam(Exam $exam)
+    {
+        $sclasses = Sclass::latest()->where('year_id',$exam->year_id)->where('stage_id',$exam->stage_id)->paginate();
+
+        return view('admin.exam-result.exam', compact('exam','sclasses'))
+            ->with('i', (request()->input('page', 1) - 1) * $sclasses->perPage());
+    }
     /**
      * Show the form for creating a new resource.
      *

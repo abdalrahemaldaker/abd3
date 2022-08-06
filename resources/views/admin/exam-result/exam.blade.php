@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Exam
+    Sclass
 @endsection
 
 @section('content')
@@ -13,12 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Exam') }}
+                                {{ __('Sclass') }}
                             </span>
 
                              <div class="float-right">
-
-                                  <h3>Choose exam</h3>
+                                <a href="{{ route('admin.sclasses.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Create New') }}
                                 </a>
                               </div>
                         </div>
@@ -35,31 +35,33 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
+										<th>name</th>
 
-										<th>Name</th>
 										<th>Year</th>
 										<th>Stage</th>
-										<th>Exam Type</th>
-										<th>Date</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($exams as $exam)
+                                    @foreach ($sclasses as $sclass)
                                         <tr>
                                             <td>{{ ++$i }}</td>
+                                            <td>{{ $sclass->name}}</td>
 
-											<td>{{ $exam->name }}</td>
-											<td>{{ $exam->year->name }}</td>
-                                            <td>{{ $exam->stage->name }}</td>
-											<td>{{ $exam->examtype->name }}</td>
-											<td>{{ $exam->date }}</td>
+											<td>{{ $sclass->year->name }}</td>
+											<td>{{ $sclass->stage->name }}</td>
 
                                             <td>
-
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.exam-results.exam',$exam->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-
+                                                <form action="{{ route('admin.sclasses.destroy',$sclass->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.sclasses.show',$sclass->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.sclasses.edit',$sclass->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.courses.index',$sclass->id) }}"><i class="fa fa-fw fa-edit"></i> Courses</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.sclasses.manage',$sclass) }}"><i class="fa fa-fw fa-edit"></i> manage</a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -68,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $exams->links() !!}
+                {!! $sclasses->links() !!}
             </div>
         </div>
     </div>
