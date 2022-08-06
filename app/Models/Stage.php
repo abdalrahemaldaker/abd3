@@ -20,12 +20,12 @@ class Stage extends Model
 
     public function subjects()
     {
-        return $this->hasMany(subjects::class);
+        return $this->hasMany(Subject::class);
     }
 
     public function sclasses()
     {
-        return $this->hasMany(sclasses::class);
+        return $this->hasMany(Sclass::class);
     }
 
     public function exams(){
