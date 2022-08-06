@@ -63,7 +63,7 @@ class SclassController extends Controller
             $course= new Course();
             $course->name=$subject->name;
             $course->subject_id=$subject->id;
-            $course->teacher_id=100000;
+            // $course->teacher_id=100000;
             $course->sclass_id=$sclass->id;
             $course->save();
 

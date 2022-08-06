@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -40,6 +41,15 @@ class Course extends Model
      * @var array
      */
     protected $fillable = ['name','sclass_id','teacher_id','subject_id','max'];
+
+
+
+    protected function teacher_id(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value ? $value : 'null',
+        );
+    }
 
 
     /**
