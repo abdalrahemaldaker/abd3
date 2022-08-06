@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('subjets', function (Blueprint $table) {
+        Schema::table('subjects', function (Blueprint $table) {
             $table->unsignedInteger('max')->after('stage_id');
         });
     }
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('subjets', function (Blueprint $table) {
+        Schema::table('subjects', function (Blueprint $table) {
             $table->dropColumn('max');
         });
     }

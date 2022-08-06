@@ -46,6 +46,11 @@ class Student extends Model
     }
 
 
+    public function name()
+    {
+       return ucfirst($this->fname) . ' ' . ucfirst($this->lname);
+    }
+
     static $rules = [
 		'fname' => 'required',
 		'lname' => 'required',

@@ -58,7 +58,7 @@
 
                                             <td>
 
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.exam-results.exam',$exam->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.exam-results.exam',$exam->id) }}"><i class="fa fa-fw fa-eye"></i> Choose</a>
 
                                             </td>
                                         </tr>

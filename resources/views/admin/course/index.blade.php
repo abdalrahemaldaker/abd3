@@ -51,7 +51,9 @@
 
 											<td>{{ $course->name }}</td>
 											<td>{{ $course->sclass->name }}</td>
-											<td>{{ $course->teacher->fname.' '.$course->teacher->lname }}</td>
+											<td>@php
+                                                if($course->teacher)echo  $course->teacher->name();
+                                            @endphp</td>
 											<td>{{ $course->subject->name }}</td>
 
                                             <td>

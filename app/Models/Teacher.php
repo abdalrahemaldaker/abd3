@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -45,6 +46,22 @@ class Teacher extends Model
      * @var array
      */
     protected $fillable = ['fname','lname','father','address','note','phone','mobile'];
+
+
+    public function name()
+    {
+       return ucfirst($this->fname) . ' ' . ucfirst($this->lname);
+    }
+//     protected function name(): Attribute
+// {
+//     return Attribute::make(
+//         get: fn ($value, $attributes) => new Address(
+//             $attributes['address_line_one'],
+//             $attributes['address_line_two'],
+//         ),
+//     );
+// }
+
 
     public function user()
     {

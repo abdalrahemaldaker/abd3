@@ -65,7 +65,7 @@ class Sclass extends Model
 
     public function courses()
     {
-        return $this->hasMany(courses::class);
+        return $this->hasMany(Course::class);
     }
     public function attendances()
     {
