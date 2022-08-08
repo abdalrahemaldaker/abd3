@@ -105,12 +105,12 @@ class ExamResultController extends Controller
      */
     public function update(Request $request, ExamResult $examResult)
     {
-        request()->validate(ExamResult::$rules);
+        // request()->validate(ExamResult::$rules);
 
-        $examResult->update($request->all());
+        // $examResult->update($request->all());
 
-        return redirect()->route('admin.exam-results.index')
-            ->with('success', 'ExamResult updated successfully');
+        // return redirect()->route('admin.exam-results.index')
+        //     ->with('success', 'ExamResult updated successfully');
     }
 
     /**

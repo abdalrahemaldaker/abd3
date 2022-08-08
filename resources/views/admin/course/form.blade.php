@@ -14,7 +14,7 @@
 
 
         <div class="form-group">
-            {{ Form::label('teacher_id') }}
+            {{ Form::label('teacher_id') }}{{ dd($course) }}
             {{ Form::select('teacher_id', $options,$course->teacher_id ,['class' => 'form-control' . ($errors->has('teacher_id') ? ' is-invalid' : '')]); }}
             {!! $errors->first('teacher_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
