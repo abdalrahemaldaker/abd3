@@ -54,7 +54,7 @@
 
                                             <td>
                                                 <form action="{{ route('admin.attendances.edit',$sclass) }}" method="GET">
-                                                    <input type="date" name="date" >
+                                                    <input type="date" name="date" value="{{ date('y-m-d') }}">
                                                     <button type="submit" class="btn btn-sm btn-success"></i>attendance</button>
                                                 </form>
                                             </td>

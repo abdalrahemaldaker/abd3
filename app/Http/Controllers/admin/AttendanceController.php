@@ -75,7 +75,7 @@ class AttendanceController extends Controller
      */
     public function edit(Request $request, Sclass $sclass)
     {
-
+        // dd($request);
         $validated= $request->validate([
             'date'      =>  'required|date'
         ]);
@@ -104,9 +104,15 @@ class AttendanceController extends Controller
     public function update(Request $request, Sclass $sclass, $date)
     {
 
-
+        // $attendances=$sclass->attendances()->where('date',$date)->get();
+        // $students=$sclass->students();
+        // dd($students);
+        // $attendances=$students->attendances()->where('date',$date);
         foreach($sclass->students as $student)
         {
+            $attendances=$student->attendances()->where('date',$date)->delete();
+
+
             // $student->attendances()->where('date',$date)->delete();
             // $attendance= new Attendance(['date'         =>  $date ,
             //                              'student_id'   =>  $student->id ,
@@ -137,7 +143,7 @@ class AttendanceController extends Controller
 
     public function fill(Request $request, Sclass $sclass)
     {
-        dd($sclass);
+        // dd($sclass);
         $validated= $request->validate([
             'date'      =>  'required|date'
         ]);
