@@ -6,7 +6,7 @@
 
 @section('content')
     <section class="content container-fluid">
-        <form method="POST" action="{{ route('admin.exam-results.update',['sclass' => $sclass->id ,'exam' => $exam->id]) }}"  role="form" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.exam-results.update',['sclass' => $sclass->id ,'exam' => $exam->id, ]) }}"  role="form" enctype="multipart/form-data">
             @csrf
 
             <div class="form-check">
@@ -18,18 +18,16 @@
             <div class="form-check form-check-inline">
                 {{-- {{ Attendance::where('sclass_id')->where('date', )->get() }} --}}
 
-                <input type="hidden" name="{{$student->id}}" value="0">
-
-                <input type="text" class="form-check-input" name="{{$student->id}}" id="{{ $student->id }}" value='1'  @php
-                $results=$student->examResults()->where('exam_id',$exam->id)->get();
-                if($attendance->first())
+                <label class="form-check-label" for="{{ $student->id }}">{{ $student->fname.' '.$student->lname }}</label>
+                <input type="text" class="form-check-input" name="{{$student->id}}" id="{{ $student->id }}"   @php
+                $results=$student->examResults()->where('exam_id',$exam->id)->where('course_id',$course)->get();
+                if($results->first())
                 {
-                    // dd($attendance);
-                    // $attendance[0]->status? echo'checked' :'';
-                    if($attendance[0]->status) echo'checked';
+                    echo 'value="'.$results->first('mark').'"';
+                }else {
+                    echo 'value="0"';
                 }
                 @endphp>
-            <label class="form-check-label" for="{{ $student->id }}">{{ $student->fname.' '.$student->lname }}</label>
         </div>
 
             @endforeach

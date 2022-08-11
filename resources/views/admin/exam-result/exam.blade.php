@@ -50,7 +50,7 @@
                                             <td>
 
                                                 <form action="{{ route('admin.exam-results.results',['sclass' => $sclass->id ,'exam' => $exam->id]) }}" method="POST">
-                                                    <select>
+                                                    <select name='course_id'>
 
                                                         @foreach ($sclass->courses()->get() as $course )
 

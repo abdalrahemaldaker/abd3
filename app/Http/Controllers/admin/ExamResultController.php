@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ExamResultsCourseRequest;
+use App\Models\Course;
 use App\Models\Exam;
 use App\Models\ExamResult;
 use App\Models\Sclass;
@@ -29,17 +31,19 @@ class ExamResultController extends Controller
 
     public function exam(Exam $exam)
     {
-        $sclasses = Sclass::latest()->where('year_id',$exam->year_id)->where('stage_id',$exam->stage_id)->paginate();
+        $sclasses = Sclass::latest()->where('year_id',$exam->year_id)->where('stage_id',$exam->stage_id)->paginate(5);
 
         return view('admin.exam-result.exam', compact('exam','sclasses'))
             ->with('i', (request()->input('page', 1) - 1) * $sclasses->perPage());
     }
 
 
-    public function results(Exam $exam , Sclass $sclass)
+    public function results(ExamResultsCourseRequest $request,Exam $exam , Sclass $sclass)
     {
+        $course=$request->validated('course_id');
+
         $students= $sclass->students();
-        return view('admin.exam-result.results', compact('exam','sclass','students'));
+        return view('admin.exam-result.results', compact('exam','sclass','students','course'));
 
     }
 
@@ -103,8 +107,18 @@ class ExamResultController extends Controller
      * @param  ExamResult $examResult
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ExamResult $examResult)
+    public function update(Request $request, Sclass $sclass ,Exam $exam , Course $course)
     {
+        foreach($sclass->students() as $student)
+        {
+            $marks=$student->examResults()->where('exam_id',$exam->id)->where('course_id',$course->id)->delete();
+            $student->examResults()->create([
+                'exam_id'   => $exam->id,
+                'course_id' => $course->id,
+                'mark'      => $request[$student->id],
+            ]);
+        }
+
         // request()->validate(ExamResult::$rules);
 
         // $examResult->update($request->all());
