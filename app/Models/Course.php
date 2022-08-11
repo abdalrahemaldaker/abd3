@@ -30,7 +30,6 @@ class Course extends Model
 
 		'teacher_id' => 'required',
 		'subject_id' => 'required',
-        'max'        => 'required|numeric'
     ];
 
     protected $perPage = 20;
@@ -44,7 +43,7 @@ class Course extends Model
 
 
 
-    protected function teacher_id(): Attribute
+    protected function teacherId(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => $value ? $value : 'null',

@@ -16,7 +16,7 @@
                         <span class="card-title">Update Course</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.courses.update',['sclass'=>$sclass,'course'=>$course->id]) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.courses.update',['sclass'=>$sclass,'course'=>$course]) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 

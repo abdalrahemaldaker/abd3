@@ -126,6 +126,7 @@ class SclassController extends Controller
      */
     public function destroy($id)
     {
+        Sclass::find($id)->students()->detach();
         $sclass = Sclass::find($id)->delete();
 
         return redirect()->route('admin.sclasses.index')

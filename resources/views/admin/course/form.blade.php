@@ -14,8 +14,8 @@
 
 
         <div class="form-group">
-            {{ Form::label('teacher_id') }}{{ dd($course) }}
-            {{ Form::select('teacher_id', $options,$course->teacher_id ,['class' => 'form-control' . ($errors->has('teacher_id') ? ' is-invalid' : '')]); }}
+            {{ Form::label('teacher') }}
+            {{ Form::select('teacher_id', $options, $course->teacher_id ,['class' => 'form-control' . ($errors->has('teacher_id') ? ' is-invalid' : '')]); }}
             {!! $errors->first('teacher_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -24,11 +24,7 @@
             {!! $errors->first('subject_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
-        <div class="form-group">
-            {{ Form::label('max') }}
-            {{ Form::number('max', $course->max, ['class' => 'form-control' . ($errors->has('max') ? ' is-invalid' : ''), 'placeholder' => 'max']) }}
-            {!! $errors->first('max', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+
 
         <div class="form-group">
 

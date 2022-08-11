@@ -15,7 +15,11 @@
             {{ Form::select('stage_id', $options,$subject->stage_id ,['class' => 'form-control' . ($errors->has('stage_id') ? ' is-invalid' : '')]); }}
             {!! $errors->first('stage_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-
+        <div class="form-group">
+            {{ Form::label('max') }}
+            {{ Form::number('max', $course->max, ['class' => 'form-control' . ($errors->has('max') ? ' is-invalid' : ''), 'placeholder' => 'max']) }}
+            {!! $errors->first('max', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
 
 
 

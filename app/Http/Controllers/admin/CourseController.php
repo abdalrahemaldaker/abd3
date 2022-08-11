@@ -35,10 +35,10 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($sclass)
+    public function create(Sclass $sclass)
     {
         $teachers=DB::table('teachers')->select(DB::raw('id,CONCAT(fname ," ",lname) as name'))->get();
-        $subjects=Subject::all();
+        $subjects=Subject::where('stage_id',$sclass->stage_id);
         $course = new Course();
         return view('admin.course.create', compact('sclass','course','teachers','subjects'));
     }
@@ -96,13 +96,13 @@ class CourseController extends Controller
      * @param  Course $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request,Sclass $sclass , Course $course)
     {
         request()->validate(Course::$rules);
 
         $course->update($request->all());
 
-        return redirect()->route('admin.courses.index')
+        return redirect()->route('admin.courses.index',$sclass)
             ->with('success', 'Course updated successfully');
     }
 
