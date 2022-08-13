@@ -42,7 +42,7 @@ class Subject extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','stage_id'];
+    protected $fillable = ['name','stage_id','max'];
 
     protected $attributes= [
         'max'    => 0,

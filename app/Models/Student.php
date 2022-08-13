@@ -40,8 +40,8 @@ class Student extends Model
     }
 
 
-    public function examResults(){
-
+    public function examResults()
+    {
         return $this->hasMany(ExamResult::class);
     }
 
