@@ -6,9 +6,10 @@
 
 @section('content')
     <section class="content container-fluid">
-        <form method="POST" action="{{ route('admin.exam-results.update',['sclass' => $sclass->id ,'exam' => $exam->id, ]) }}"  role="form" enctype="multipart/form-data">
+        {{-- {{ dd($course) }} --}}
+        <form method="POST" action="{{ route('admin.exam-results.update',['sclass' => $sclass ,'exam' => $exam ,  'course' => $course  ]) }}"  role="form" enctype="multipart/form-data">
             @csrf
-
+            @method('put')
             <div class="form-check">
             <input type="checkbox" name="select-all" id="select-all" />
             <label class="form-check-label" >Select All</label>
@@ -23,7 +24,7 @@
                 $results=$student->examResults()->where('exam_id',$exam->id)->where('course_id',$course)->get();
                 if($results->first())
                 {
-                    echo 'value="'.$results->first('mark').'"';
+                    echo 'value="'.$results[0]['mark'].'"';
                 }else {
                     echo 'value="0"';
                 }

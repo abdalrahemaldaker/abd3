@@ -107,24 +107,31 @@ class ExamResultController extends Controller
      * @param  ExamResult $examResult
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sclass $sclass ,Exam $exam , Course $course)
+    public function update(Request $request,Exam $exam ,Sclass $sclass , Course $course)
     {
-        foreach($sclass->students() as $student)
+
+        $max=$course->subject->max;
+        // dd($sclass->students()->get());
+        foreach($sclass->students()->get() as $student)
         {
+            // dd($student);
             $marks=$student->examResults()->where('exam_id',$exam->id)->where('course_id',$course->id)->delete();
-            $student->examResults()->create([
-                'exam_id'   => $exam->id,
-                'course_id' => $course->id,
-                'mark'      => $request[$student->id],
-            ]);
+            if($request[$student->id]<=$max){
+                $student->examResults()->create([
+                    'exam_id'   => $exam->id,
+                    'course_id' => $course->id,
+                    'mark'      => $request[$student->id],
+                ]);
+
+            }
         }
 
         // request()->validate(ExamResult::$rules);
 
         // $examResult->update($request->all());
 
-        // return redirect()->route('admin.exam-results.index')
-        //     ->with('success', 'ExamResult updated successfully');
+        return redirect()->route('admin.exam-results.index')
+            ->with('success', 'ExamResult updated successfully');
     }
 
     /**
