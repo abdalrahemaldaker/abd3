@@ -57,7 +57,30 @@
 
     @include ('partials.navbar')
 
+    @auth
 
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#" class="nav-link mr-auto">Control panel</a>
+        <ul class="list-inline mr-auto navbar-nav">
+            <li class="list-inline-item active"><a href="{{ route('admin.users.index') }}" class="nav-link mr-auto ">Users</a></li>
+            <li class="list-inline-item"><a href="{{ route('admin.years.index') }}" class="nav-link mr-auto">Years</a></li>
+            <li class="list-inline-item"><a href="{{ route('admin.stages.index') }}" class="nav-link mr-auto">Stages</a></li>
+            <li class="list-inline-item"><a href="{{ route('admin.subjects.index') }}" class="nav-link mr-auto">Subjects</a></li>
+            <li class="list-inline-item"><a href="{{ route('admin.students.index') }}" class="nav-link mr-auto">Students</a></li>
+            <li class="list-inline-item"><a href="{{ route('admin.teachers.index') }}" class="nav-link mr-auto">Teachers</a></li>
+            <li class="list-inline-item"><a href="{{ route('admin.sclasses.index') }}" class="nav-link mr-auto">Classes</a></li>
+            <li class="list-inline-item"><a href="{{ route('admin.attendances.index') }}" class="nav-link mr-auto">Attendance</a></li>
+            <li class="list-inline-item"><a href="{{ route('admin.exam-types.index') }}" class="nav-link mr-auto">Exam Types</a></li>
+            <li class="list-inline-item"><a href="{{ route('admin.exams.index') }}" class="nav-link mr-auto">Exams</a></li>
+            <li class="list-inline-item"><a href="{{ route('admin.exam-results.index') }}" class="nav-link mr-auto">Results</a></li>
+            <li class="list-inline-item"><a class="nav-link mr-auto" href="#">Home <span class="sr-only">(current)</span></a></li>
+            </ul>
+
+    </nav>
+
+    @endauth
 
 
 
