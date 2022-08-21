@@ -96,7 +96,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         return view('test');
     });
 
-    // Route::view('/test', 'test');
+    Route::view('/test', 'test');
     Route::get('/sclasses/autocomplete-search', [SclassmanageController::class, 'autocompleteSearch'])->name('/sclasses.autocomplete-search');
     // Route::resource('stages', StageController::class);
 });

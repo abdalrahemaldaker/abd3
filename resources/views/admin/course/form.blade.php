@@ -15,7 +15,7 @@
 
         <div class="form-group">
             {{ Form::label('teacher') }}
-            {{ Form::select('teacher_id', $options, $course->teacher_id ,['class' => 'form-control' . ($errors->has('teacher_id') ? ' is-invalid' : '')]); }}
+            {{ Form::select('teacher_id', $options, $course->teacher_id ,['class' => 'form-control select2' . ($errors->has('teacher_id') ? ' is-invalid' : '')]); }}
             {!! $errors->first('teacher_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -38,3 +38,4 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </div>
+
