@@ -77,13 +77,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         Route::delete('sclasses/manage/{sclass}', [SclassmanageController::class ,'destroy'] )->name('student.detach');
         Route::resource('/sclasses/{sclass}/courses', CourseController::class);
         Route::get('/attendances', [AttendanceController::class , 'index'])->name('attendances.index');
-        Route::get('/attendances/{sclass}/edit', [AttendanceController::class , 'edit'])->name('attendances.edit');
+        Route::get('/attendances/edit', [AttendanceController::class , 'edit'])->name('attendances.edit');
         Route::post('/attendances/{sclass}/{date}', [AttendanceController::class , 'update'])->name('attendances.update');
         Route::resource('exams', ExamController::class);
         // Route::resource('exam-results', ExamResultController::class);
         Route::get('/exam-results', [ExamResultController::class , 'index'])->name('exam-results.index');
         Route::get('/exam-results/{exam}/exam', [ExamResultController::class , 'exam'])->name('exam-results.exam');
         Route::post('/exam-results/{exam}/{sclass}/results', [ExamResultController::class , 'results'])->name('exam-results.results');
+        Route::get('/exam-results/results2', [ExamResultController::class , 'results2'])->name('exam-results.results2');
         Route::put('/exam-results/{exam}/{sclass}/{course}', [ExamResultController::class , 'update'])->name('exam-results.update');
         // Route::resource('{sclass}/attendances', AttendanceController::class)->except('index');
 

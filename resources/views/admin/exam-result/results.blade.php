@@ -21,7 +21,7 @@
 
                 <label class="form-check-label" for="{{ $student->id }}">{{ $student->fname.' '.$student->lname }}</label>
                 <input type="text" class="form-check-input" name="{{$student->id}}" id="{{ $student->id }}"   @php
-                $results=$student->examResults()->where('exam_id',$exam->id)->where('course_id',$course)->get();
+                $results=$student->examResults()->where('exam_id',$exam)->where('course_id',$course)->get();
                 if($results->first())
                 {
                     echo 'value="'.$results[0]['mark'].'"';

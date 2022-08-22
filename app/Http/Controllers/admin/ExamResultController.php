@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExamResultsCourseRequest;
+use App\Http\Requests\ExamResultsCourseRequest2;
 use App\Models\Course;
 use App\Models\Exam;
 use App\Models\ExamResult;
@@ -41,6 +42,16 @@ class ExamResultController extends Controller
     public function results(ExamResultsCourseRequest $request,Exam $exam , Sclass $sclass)
     {
         $course=$request->validated('course_id');
+
+        $students= $sclass->students();
+        return view('admin.exam-result.results', compact('exam','sclass','students','course'));
+
+    }
+    public function results2(ExamResultsCourseRequest2 $request)
+    {
+        $course=$request->validated('course');
+        $sclass=Sclass::find($request->validated('sclass'));
+        $exam=$request->validated('exam');
 
         $students= $sclass->students();
         return view('admin.exam-result.results', compact('exam','sclass','students','course'));
@@ -112,9 +123,10 @@ class ExamResultController extends Controller
 
         $max=$course->subject->max;
         // dd($sclass->students()->get());
+        // dd($course);
+        // dd($request);
         foreach($sclass->students()->get() as $student)
         {
-            // dd($student);
             $marks=$student->examResults()->where('exam_id',$exam->id)->where('course_id',$course->id)->delete();
             if($request[$student->id]<=$max){
                 $student->examResults()->create([

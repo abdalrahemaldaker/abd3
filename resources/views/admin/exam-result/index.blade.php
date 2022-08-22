@@ -29,7 +29,7 @@
                         </div>
                     @endif
 
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
@@ -66,7 +66,16 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div> --}}
+                    <form action="{{ route('admin.exam-results.results2') }}" method="GET">
+                        @livewire('resultsform')
+
+                        <input type="submit" class="btn btn-sm btn-info" value="Results">
+                    </form>
+
+
+
+
                 </div>
                 {!! $exams->links() !!}
             </div>
