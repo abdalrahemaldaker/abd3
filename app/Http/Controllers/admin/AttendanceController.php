@@ -73,14 +73,15 @@ class AttendanceController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Sclass $sclass)
+    public function edit(Request $request)
     {
-        // dd($request);
         $validated= $request->validate([
-            'date'      =>  'required|date'
+            'date'      =>  'required|date',
+            'sclass'    =>  'required|exists:sclasses,id'
         ]);
+        // dd($request);
         $date=$validated['date'];
-
+        $sclass=Sclass::find($validated['sclass']);
         // foreach ($sclass->students as $student)
         // {
         //     if($student->attendances()->wherehas()) dd($student);

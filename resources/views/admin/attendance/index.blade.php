@@ -64,9 +64,15 @@
                             </table>
                         </div>
                     </div>
+                    <form action="{{ route('admin.attendances.edit') }}" method="GET">
+                        @livewire('attendance',['stage'=>'','sclass' =>''])
+                        <input type="date" name="date" id=""><br>
+                        <input type="submit" class="btn btn-sm btn-success" value="Attendance">
+                    </form>
                 </div>
                 {!! $sclasses->links() !!}
             </div>
+
         </div>
     </div>
 @endsection

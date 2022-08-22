@@ -52,6 +52,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('css')
+    @livewireStyles
 </head>
 <body>
 
@@ -116,6 +117,7 @@
     <!-- Template Javascript -->
     <script src="/js/main.js"></script>
     @stack('js')
+    @livewireScripts
 </body>
 
 </html>
